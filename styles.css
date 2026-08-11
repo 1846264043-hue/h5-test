@@ -1,0 +1,30 @@
+:root { color-scheme: light; font-family: Arial, "PingFang SC", "Microsoft YaHei", sans-serif; }
+* { box-sizing: border-box; }
+html, body { margin: 0; min-height: 100%; background: #eeeeee; }
+body { min-height: 100dvh; overflow: hidden; }
+.app { display: grid; min-height: 100dvh; place-items: center; }
+.phone {
+  position: relative;
+  width: min(100vw, calc(100dvh * 375 / 812), 375px);
+  height: min(100dvh, calc(100vw * 812 / 375), 812px);
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: none;
+  background: #fff;
+  box-shadow: 0 18px 55px rgba(0,0,0,.15);
+}
+.phone::-webkit-scrollbar { display: none; }
+.canvas { position: relative; width: 100%; min-height: 100%; overflow: hidden; background: #fff; }
+.screen-art { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: fill; user-select: none; pointer-events: none; }
+.hit {
+  position: absolute; z-index: 3; margin: 0; padding: 0; border: 0; border-radius: 18px;
+  background: transparent; cursor: pointer; touch-action: pan-y; -webkit-tap-highlight-color: transparent;
+}
+.hit:focus-visible { outline: 3px solid #ff6f91; outline-offset: -3px; }
+.canvas.enter-smart { animation: smart-in .3s ease-out both; }
+.canvas.enter-right { animation: move-in-right .3s ease-out both; }
+@keyframes smart-in { from { opacity: .45; transform: scale(.985); } to { opacity: 1; transform: scale(1); } }
+@keyframes move-in-right { from { transform: translateX(100%); } to { transform: translateX(0); } }
+@media (max-width: 500px) { .phone { box-shadow: none; } }
+@media (prefers-reduced-motion: reduce) { .canvas.enter-smart, .canvas.enter-right { animation-duration: .001ms; } }
